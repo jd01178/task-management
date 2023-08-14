@@ -1,0 +1,12 @@
+{% load widget_tweaks %}
+{% for field in form %}
+    <div class="form-group">
+      <label class="form-label">{{field.label}}</label>
+       {% if "date" in field.label or "Date" in field.label %}
+             {% render_field field class+="form-control" placeholder=field.label type="datetime-local" %}
+        {% else %}
+      {% render_field field class+="form-control" placeholder=field.label %}
+        {% endif %}
+      <div class="text-danger" id=field.id>{{ field.errors }}</div>
+    </div>
+{% endfor %}

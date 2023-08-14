@@ -1,0 +1,150 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+    <div class="main-container container-fluid">
+
+        <!-- PAGE-HEADER -->
+        <div class="page-header">
+{#            <div>#}
+{#                <h1 class="page-title">Dashboard 01</h1>#}
+{#                <ol class="breadcrumb">#}
+{#                    <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>#}
+{#                    <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li>#}
+{#                </ol>#}
+{#            </div>#}
+            <div class="ms-auto pageheader-btn">
+                <a href="{% url 'task:task_create' %}" class="btn btn-success btn-icon text-white me-2">
+                    <span>
+                            <i class="fe fe-plus"></i>
+                        </span> Add Task
+                </a>
+                <a href="{% url 'accounts:logout' %}" class="btn btn-danger-gradient
+                 btn-icon text-white">
+                    <span>
+                            <i class="fe fe-log-out"></i>
+                        </span> Logout
+                </a>
+            </div>
+        </div>
+        <!-- PAGE-HEADER END -->
+
+        <!-- ROW-1 -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="">Not Started Tasks</h6>
+                                        <h3 class="mb-2 number-font">{{ tasks_not_started }}</h3>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div class="counter-icon bg-primary-gradient box-shadow-primary brround ms-auto">
+                                            <i class="fe fe-calendar text-white mb-5 "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="">Tasks in progress</h6>
+                                        <h3 class="mb-2 number-font">{{ tasks_in_progress }}</h3>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div class="counter-icon bg-danger-gradient box-shadow-danger brround  ms-auto">
+                                            <i class="icon icon-calendar text-white mb-5 "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="">Completed Tasks</h6>
+                                        <h3 class="mb-2 number-font">{{ tasks_completed }}</h3>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div class="counter-icon bg-secondary-gradient box-shadow-secondary brround ms-auto">
+                                            <i class="fe fe-layers text-white mb-5 "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xl-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="">Overdue Tasks</h6>
+                                        <h3 class="mb-2 number-font">{{ overdue_tasks }}</h3>
+                                    </div>
+                                    <div class="col col-auto">
+                                        <div class="counter-icon bg-success-gradient box-shadow-success brround  ms-auto">
+                                            <i class="fe fe-layers text-white mb-5 "></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tasks Progress</h3>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div id="chartArea" class="chart-donut"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- COL END -->
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="card custom-card ">
+                    <div class="card-header">
+                        <h3 class="card-title">Completed Tasks Percentage</h3>
+                    </div>
+                    <div class="card-body pt-0 ps-0 pe-0">
+                        <div id="recentorders" class="apex-charts ht-150"></div>
+                        <div class="row sales-product-infomation pb-0 mb-0 mx-auto wd-100p mt-6">
+                            <div class="col-md-6 col justify-content-center text-center">
+                                <p class="mb-0 d-flex justify-content-center"><span class="legend bg-primary"></span>Completed</p>
+                                <h3 class="mb-1 fw-bold">{{ completed_tasks_6_months }}</h3>
+                                <div class="d-flex justify-content-center ">
+                                    <p class="text-muted mb-0">Last 6 months</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col text-center float-end">
+                                <p class="mb-0 d-flex justify-content-center "><span class="legend bg-background2"></span>Over Due</p>
+                                <h3 class="mb-1 fw-bold">{{ overdue_tasks_6_months }}</h3>
+                                <div class="d-flex justify-content-center ">
+                                    <p class="text-muted mb-0">Last 6 months</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- COL END -->
+        </div>
+        <!-- ROW-1 END -->
+    </div>
+{% endblock %}

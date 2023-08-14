@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+    <div class="main-container container-fluid mt-3">
+
+        <!-- PAGE-HEADER -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Full Calendar</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Full Calender</li>
+                </ol>
+            </div>
+            <div class="ms-auto pageheader-btn">
+                <a href="{% url 'task:google_authenticate' %}" class="btn btn-primary btn-icon text-white me-2 mt-2">
+                    <span>
+                            <i class="fe fe-loader"></i>
+                        </span> Sync Google Calender
+                </a>
+{#                <a href="{% url 'task:index' %}" class="btn btn-success btn-icon text-white  mt-2">#}
+{#                    <span>#}
+{#                            <i class="fe fe-loader"></i>#}
+{#                        </span> Sync Microsoft Calender#}
+{#                </a>#}
+            </div>
+        </div>
+        <!-- PAGE-HEADER END -->
+
+        <!-- ROW OPEN -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Calender</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-xl-3">
+                                <div id="external-events">
+                                    <h4>Draggable Tasks</h4>
+                                    {% for task in tasks %}
+                                        <div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event {% if task.priority == 1 %}bg-danger{% elif task.priority == 2 %}bg-warning{% else %}bg-success{% endif %}">
+                                            <div class="fc-event-main"> {{ task.title }}</div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xl-9 mt-5 mt-xl-0">
+                                <div id='calendar2'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">List Calendar</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ROW CLOSED -->
+    </div>
+{% endblock %}
+{% block scripts %}
+    <!-- FULL CALENDAR JS -->
+    <script src="{% static 'plugins/fullcalendar/moment.min.js' %}"></script>
+    <script src="{% static 'plugins/fullcalendar/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'js/fullcalendar.js' %}"></script>
+{% endblock %}

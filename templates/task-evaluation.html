@@ -1,0 +1,107 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+<div class="main-container container-fluid">
+    <!-- PAGE-HEADER -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Tasks Evaluation Panel</h1>
+        </div>
+        <div class="ms-auto pageheader-btn">
+            <a href="{% url 'task:task_create' %}" class="btn btn-primary btn-icon text-white me-2">
+                <span>
+                    <i class="fe fe-plus"></i>
+                </span> Add Task
+            </a>
+        </div>
+    </div>
+    <!-- PAGE-HEADER END -->
+    <!-- ROW-1 OPEN -->
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <p class="h4 text-capitalize fw-bold">Personal Tasks</p>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <p class="h4 text-capitalize fw-bold">Work Tasks</p>
+        </div>
+    </div>
+    <!-- ROW-2 CLOSED -->
+    <!-- ROW-1 OPEN -->
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Daily Personal Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="personal-chart-donut" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Daily Work Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-donut" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Weekly Personal Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="personal-chart-donut2" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Weekly Work Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-donut2" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Monthly Personal Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="personal-chart-donut3" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Monthly Work Tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-donut3" class="chartsh"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-2 CLOSED -->
+</div>
+{% endblock %}
+{% block scripts %}
+    <!-- C3 CHART JS -->
+    <script src="{% static 'plugins/charts-c3/d3.v5.min.js' %}"></script>
+    <script src="{% static 'plugins/charts-c3/c3-chart.js' %}"></script>
+
+    <!-- INPUT MASK JS-->
+    <script src="{% static 'plugins/input-mask/jquery.mask.min.js' %}"></script>
+
+    <!-- CHART-DONUT JS -->
+    <script src="{% static 'js/charts.js' %}"></script>
+{% endblock %}

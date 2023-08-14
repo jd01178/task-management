@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+{% load static %}
+<head>
+
+        <!-- META DATA -->
+        <meta charset="UTF-8">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- TITLE -->
+        <title>Task Management – {% block title %}{% endblock %}</title>
+        <meta name="description" content="Task Management System - {% block description %}{% endblock %}">
+        <meta name="author" content="Bonface M">
+        <meta name="keywords" content="">
+{#        <meta name="theme-color" content="#f6f6f6">#}
+
+        {% include 'includes/styles.html' %}
+        {% include 'includes/toast-script-and-styles.html' %}
+        {% block styles %}{% endblock %}
+</head>
+
+    <body class="app sidebar-mini ltr light-mode">
+
+        <!-- Switcher -->
+{#        {% include 'includes/switcher.html' %}#}
+        <!-- End Switcher -->
+
+        <!-- GLOBAL-LOADER -->
+        <div id="global-loader">
+            <img src="https://spruko.com/demo/aspnet/zanex/zanex/assets/images/loader.svg" class="loader-img" alt="Loader">
+        </div>
+        <!-- /GLOBAL-LOADER -->
+
+        <!-- PAGE -->
+        <div class="page">
+            <div class="page-main">
+
+                <!-- app-Header -->
+                {% include 'includes/header.html' %}
+                <!-- /app-Header -->
+
+                <!--APP-SIDEBAR-->
+                {% include 'includes/sidebar.html' %}
+                <!--/APP-SIDEBAR-->
+
+                <!--app-content open-->
+                <div class="main-content app-content mt-0">
+                    <div class="side-app">
+
+                        <!-- CONTAINER -->
+                        {% block content %}{% endblock %}
+                        <!-- CONTAINER END -->
+                    </div>
+                </div>
+                <!--app-content end-->
+            </div>
+
+            <!-- Sidebar-right -->
+            {% include 'includes/right-sidebar.html' %}
+            <!--/Sidebar-right-->
+
+            <!-- FOOTER -->
+            {% include 'includes/footer.html' %}
+            <!-- FOOTER END -->
+        </div>
+
+        <!-- BACK-TO-TOP -->
+        <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+        {% include 'includes/scripts.html' %}
+        {% include 'includes/messages.html' %}
+        {% block scripts %}{% endblock %}
+    </body>
+
+
+</html>

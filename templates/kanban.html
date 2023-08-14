@@ -1,0 +1,120 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+    <div class="main-container container-fluid pt-3">
+        <h3 class="font-weight-light text-dark">Update Task Progress</h3>
+{#        <div class="small  text-dark">Drag and drop between swim lanes</div>#}
+        <div class="row flex-row flex-sm-nowrap py-3">
+            <div class="col-sm-6 col-md-4 col-xl-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-truncate py-2">To Do</h6>
+                        <div class="items border border-light">
+
+                            {% for progress in tasks_not_started %}
+                                <div class="card draggable shadow-sm" id="task-{{ progress.slug }}" draggable="true" ondragstart="drag(event)">
+                                    <div class="card-body p-2">
+                                        <div class="card-title">
+{#                                            <img src="//via.placeholder.com/30" class="rounded-circle float-right">#}
+                                            <a href="" class="lead font-weight-light text-capitalize">{{ progress.slug }}</a>
+                                        </div>
+                                        <p>
+                                            {{ progress.task.title }}
+                                        </p>
+                                        <a href="{% url 'task:task_update' slug=progress.task.slug %}" class="btn btn-primary btn-sm">Edit</a>
+                                    </div>
+                                </div>
+                                 <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="0"> &nbsp; </div>
+                             {% empty %}
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="0"> &nbsp; </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-truncate py-2">In-progress</h6>
+                        <div class="items border border-light">
+                            {% for progress in  tasks_in_progress %}
+                                <div class="card draggable shadow-sm" id="task-{{ progress.slug }}" draggable="true" ondragstart="drag(event)">
+                                    <div class="card-body p-2">
+                                        <div class="card-title">
+{#                                            <img src="//via.placeholder.com/30" class="rounded-circle float-right">#}
+                                            <a href="" class="lead font-weight-light text-capitalize">{{ progress.slug }}</a>
+                                        </div>
+                                        <p>
+                                            {{ progress.task.title }}
+                                        </p>
+                                        <a href="{% url 'task:task_update' slug=progress.task.slug %}" class="btn btn-primary btn-sm">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="1"> &nbsp; </div>
+                            {% empty %}
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="1"> &nbsp; </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-truncate py-2">Review</h6>
+                        <div class="items border border-light">
+                            {% for progress in  tasks_review %}
+                                <div class="card draggable shadow-sm" id="task-{{ progress.slug }}" draggable="true" ondragstart="drag(event)">
+                                    <div class="card-body p-2">
+                                        <div class="card-title">
+{#                                            <img src="//via.placeholder.com/30" class="rounded-circle float-right">#}
+                                            <a href="" class="lead font-weight-light text-capitalize">{{ progress.slug }}</a>
+                                        </div>
+                                        <p>
+                                            {{ progress.task.title }}
+                                        </p>
+                                        <a href="{% url 'task:task_update' slug=progress.task.slug %}" class="btn btn-primary btn-sm">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="2"> &nbsp; </div>
+                            {% empty %}
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="2"> &nbsp; </div>
+                            {% endfor  %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title text-uppercase text-truncate py-2">Complete</h6>
+                        <div class="items border border-light">
+                            {% for progress in  tasks_completed %}
+                                <div class="card draggable shadow-sm" id="task-{{ progress.slug }}" draggable="true" ondragstart="drag(event)">
+                                    <div class="card-body p-2">
+                                        <div class="card-title">
+{#                                            <img src="//via.placeholder.com/30" class="rounded-circle float-right">#}
+                                            <a href="" class="lead font-weight-light text-capitalize">{{ progress.slug }}</a>
+                                        </div>
+                                        <p>
+                                           {{ progress.task.title }}
+                                        </p>
+                                        <a href="{% url 'task:task_update' slug=progress.task.slug %}" class="btn btn-primary btn-sm">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="3"> &nbsp; </div>
+                            {% empty %}
+                                <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="clearDrop(event)" id="3"> &nbsp; </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/kanban.js' %}"></script>
+{% endblock %}

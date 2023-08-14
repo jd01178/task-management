@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/map.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="main-container container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="h3 mt-3">Tasks Locations</p>
+                <div class="search-container mb-3">
+                    <div class="search">
+                        <input id="search-input" type="text" placeholder="Search Task">
+                        <i class="fas fa-search" onclick="searchStores()"></i>
+                    </div>
+                </div>
+                <div class="store-list-container">
+                    <div class="stores-list">
+                        <div class="store-container">
+                            <div class="store-container-background">
+                                <div class="store-info-container">
+                                    <div class="store-address">
+                                        <span>{{ task.title }}</span>
+                                        <span>{{ task.location.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="store-number-container">
+                                    <div class="store-number">{{ task.location.tasks }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="map" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+        <script src="{% static 'js/map.js' %}"></script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap">
+        </script>
+{% endblock %}

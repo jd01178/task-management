@@ -1,0 +1,9 @@
+
+/core/__pycache__/
+/venv/
+/.idea/*
+/htmlcov/
+/db.sqlite3
+/manifest.json
+/.coverage
+/.pytest_cache/

@@ -1,0 +1,156 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
+
+    <!-- PAGE-HEADER -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Edit Profile</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
+            </ol>
+        </div>
+        <div class="ms-auto pageheader-btn">
+            <a href="{% url 'task:index' %}" class="btn btn-success btn-icon text-white">
+                <span>
+                    <i class="fe fe-home"></i>
+                </span> Home
+            </a>
+        </div>
+    </div>
+    <!-- PAGE-HEADER END -->
+
+    <!-- ROW-1 OPEN -->
+    <div class="row">
+        <div class="col-xl-4 col-md-12 col-sm-12">
+            <form method="post" id="change-password-form">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Edit Password</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Change Password</label>
+                            <input type="password" class="form-control" name="old_password">
+                            <span class="text-danger" id="old_password"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-control" name="new_password">
+                            <span class="text-danger" id="new_password"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm_new_password">
+                            <span class="text-danger" id="confirm_new_password"></span>
+                        </div>
+                        <div class="form-group text-danger" id="error">
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary" id="change-password-button">Change Password</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </div>
+            </form>
+            <div class="card panel-theme">
+                <div class="card-header">
+                    <div class="float-start">
+                        <h3 class="card-title">Contact</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="card-body no-padding">
+                    <ul class="list-group no-margin">
+                        <li class="list-group-item"><a href="#"><i class="fa fa-envelope list-contact-icons border text-center br-100"></i> <span class="contact-icons text-dark">{{ request.user.email }}</span></a></li>
+                        <li class="list-group-item"><a href="#"><i class="fa fa-globe list-contact-icons border text-center br-100"></i><span class="contact-icons text-dark"> {{ request.user.employee.website }}</span></a></li>
+                        <li class="list-group-item"><a href="#"><i class="fa fa-phone list-contact-icons border text-center br-100"></i> <span class="contact-icons text-dark">{{ request.user.employee.phone_number }}</span></a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-12 col-sm-12">
+            <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <img alt="User Avatar" class="rounded-circle avatar-lg me-2" src="{% if request.user.employee.image %}{{ request.user.employee.image.url }}{% else %}{% static 'images/users/default.png' %}{% endif %}">
+    {#                        <div class="ms-auto mt-xl-2 mt-lg-0 me-lg-2">#}
+    {#                            <a href="edit-profile.html" class="btn btn-primary btn-sm mt-1 mb-1"><i class="fe fe-camera me-1 float-start"></i>Edit profile</a>#}
+    {#                            <a href="javascript:void(0);" class="btn btn-danger btn-sm mt-1 mb-1"><i class="fe fe-camera-off me-1 float-start"></i>Delete profile</a>#}
+    {#                        </div>#}
+                        </div>
+                        <div class="row">
+                            {% include 'includes/profile-form.html' with form=form %}
+                            {% include 'includes/profile-form.html' with form=p_form %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-success mt-1">Save</button>
+                        <button type="reset" class="btn btn-danger mt-1">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- ROW-1 CLOSED -->
+    <!-- ROW-2 OPEN -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header ">
+                    <h3 class="card-title ">Tasks</h3>
+                    <div class="card-options">
+                        <a id="add__new__list" class="btn btn-primary" href="{% url 'task:task_create' %}"><i class="fa fa-plus"></i> Add a new Task</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover card-table table-striped table-vcenter table-outline text-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Task Name</th>
+                                <th scope="col">Deadline</th>
+                                <th scope="col">Edit Task Details </th>
+                                <th scope="col">Delete </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.slug }}</td>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.end_date }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{% url 'task:task_update' slug=task.slug %}"><i class="fa fa-edit"></i> Edit</a>
+                                </td>
+                                <td>
+                                   <form method="post" action="{% url 'task:task_delete' slug=task.slug %}">
+                                       {% csrf_token %}
+                                       <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                                   </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-2 CLOSED -->
+</div>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/edit-profile.js' %}"></script>
+{% endblock %}

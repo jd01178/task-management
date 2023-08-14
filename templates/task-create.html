@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+<div class="main-container container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ action }} Task </h3>
+                </div>
+                <div class="card-body pb-2">
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        {% include 'includes/form.html' with form=form %}
+                        <button type="submit" class="btn btn-primary">{{ action }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

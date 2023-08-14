@@ -1,0 +1,12 @@
+/.env
+/venv/
+.idea/
+/accounts/__pycache__/
+/accounts/migrations/__pycache__/
+/task/__pycache__/
+/task/migrations/__pycache__/
+/core/__pycache__/
+/core/settings/__pycache__/
+/media/
+/static/
+/profiles/
